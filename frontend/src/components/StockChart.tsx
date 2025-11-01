@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { useToast } from "@/hooks/use-toast";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL; // ✅ Use your .env value
 
 interface ChartData {
   price: number;
@@ -18,35 +18,34 @@ const StockChart = ({ symbol }: StockChartProps) => {
   const [data, setData] = useState<ChartData[]>([]);
   const { toast } = useToast();
 
-const fetchHistory = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/history/${symbol}`);
-    if (!response.ok) throw new Error("Failed to fetch history");
-    const result = await response.json();
+  const fetchHistory = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/history/${symbol}`); // ✅ fixed variable name
+      if (!response.ok) throw new Error("Failed to fetch history");
+      const result = await response.json();
 
-    // FIX: access result.history (not result directly)
-    const history = result.history || [];
+      // access result.history (if available)
+      const history = result.history || [];
 
-    const formatted = history.slice(-20).map((item: any) => ({
-      price: item.price,
-      timestamp: item.timestamp,
-      time: new Date(item.timestamp).toLocaleTimeString([], { 
-        hour: '2-digit', 
-        minute: '2-digit' 
-      }),
-    }));
+      const formatted = history.slice(-20).map((item: any) => ({
+        price: item.price,
+        timestamp: item.timestamp,
+        time: new Date(item.timestamp).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      }));
 
-    setData(formatted);
-  } catch (error) {
-    console.error("Error fetching history:", error);
-    toast({
-      title: "Fetch Error",
-      description: "Unable to load stock history. Check backend connection.",
-      variant: "destructive",
-    });
-  }
-};
-
+      setData(formatted);
+    } catch (error) {
+      console.error("Error fetching history:", error);
+      toast({
+        title: "Fetch Error",
+        description: "Unable to load stock history. Check backend connection.",
+        variant: "destructive",
+      });
+    }
+  };
 
   useEffect(() => {
     fetchHistory();
@@ -66,27 +65,27 @@ const fetchHistory = async () => {
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-        <XAxis 
-          dataKey="time" 
+        <XAxis
+          dataKey="time"
           className="text-xs"
-          tick={{ fill: 'hsl(var(--muted-foreground))' }}
+          tick={{ fill: "hsl(var(--muted-foreground))" }}
         />
-        <YAxis 
-          domain={['auto', 'auto']}
+        <YAxis
+          domain={["auto", "auto"]}
           className="text-xs"
-          tick={{ fill: 'hsl(var(--muted-foreground))' }}
+          tick={{ fill: "hsl(var(--muted-foreground))" }}
         />
-        <Tooltip 
-          contentStyle={{ 
-            backgroundColor: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))',
-            borderRadius: '8px'
+        <Tooltip
+          contentStyle={{
+            backgroundColor: "hsl(var(--card))",
+            border: "1px solid hsl(var(--border))",
+            borderRadius: "8px",
           }}
         />
-        <Line 
-          type="monotone" 
-          dataKey="price" 
-          stroke="hsl(var(--primary))" 
+        <Line
+          type="monotone"
+          dataKey="price"
+          stroke="hsl(var(--primary))"
           strokeWidth={2}
           dot={false}
         />
