@@ -1,3 +1,7 @@
+| Component                    | URL                                                                                                                            | Platform             |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------- |
+| 🧠 **Backend (FastAPI)**     | [https://stockpulse-ai.onrender.com](https://stockpulse-ai.onrender.com)                                                       | Render (Web Service) |
+| 💻 **Frontend (Vite React)** | [https://stockpulse-ai-frontend-likhithajagadeesh.onrender.com](https://stockpulse-ai-frontend-likhithajagadeesh.onrender.com) | Render (Static Site) |
 
 # 🧠 StockPulse-AI  
 **Real-Time Stock Market Data Pipeline with AI Price Prediction**
