@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🧠 StockPulse-AI  
 **Real-Time Stock Market Data Pipeline with AI Price Prediction**
 
@@ -176,3 +177,6 @@ Frontend will start at 👉 **http://localhost:5173**
 **Likhitha J**  
 🚀 *Developer | AI + Full Stack Enthusiast*  
 🌐 GitHub: [TensorDevLJ](https://github.com/TensorDevLJ)
+=======
+# StockPulse-AI
+>>>>>>> c5d7a60 (Initial commit)
