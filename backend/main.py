@@ -12,7 +12,7 @@ app = FastAPI(title="StockPulse-AI Backend")
 # ✅ Enable CORS for frontend connection
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
+    allow_origins=["https://stockpulse-frontend.onrender.com","http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
